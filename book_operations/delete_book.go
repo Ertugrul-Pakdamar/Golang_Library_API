@@ -8,9 +8,9 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func DeleteBooksFromMongoDB(ctx context.Context, id primitive.ObjectID) error {
-	filter := bson.M{"_id": id}
+func DeleteBookFromMongoDB(ctx context.Context, id primitive.ObjectID) error {
+	book := bson.M{"_id": id}
 
-	_, err := database.GetBooksCollection().DeleteOne(ctx, filter)
+	_, err := database.GetBooksCollection().DeleteOne(ctx, book)
 	return err
 }

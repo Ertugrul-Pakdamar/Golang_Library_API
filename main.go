@@ -1,16 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"main/book_operations"
 	"main/database"
-
-	"go.mongodb.org/mongo-driver/bson/primitive"
+	"main/examples"
 )
 
 func main() {
@@ -24,10 +21,7 @@ func main() {
 
 	ctx := database.GetContext()
 
-	err = book_operations.DeleteBooksFromMongoDB(ctx, primitive.ObjectID{0})
-	if err != nil {
-		fmt.Println("Error: ", err)
-	}
+	examples.Example(ctx)
 
 	<-c
 	log.Println("Shutting down gracefully...")
