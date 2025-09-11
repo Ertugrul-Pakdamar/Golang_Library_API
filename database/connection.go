@@ -2,7 +2,6 @@ package database
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"time"
 
@@ -26,12 +25,12 @@ func ConnectToMongoDB() error {
 
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
-		return fmt.Errorf("failed to connect to MongoDB: %v", err)
+		return err
 	}
 
 	err = client.Ping(ctx, nil)
 	if err != nil {
-		return fmt.Errorf("failed to ping MongoDB: %v", err)
+		return err
 	}
 
 	Client = client
@@ -39,7 +38,7 @@ func ConnectToMongoDB() error {
 	Books = Database.Collection("books")
 	Users = Database.Collection("users")
 
-	log.Println("Successfully connected to MongoDB!")
+	log.Println("MongoDB bağlantısı başarılı")
 	return nil
 }
 
@@ -50,10 +49,8 @@ func DisconnectFromMongoDB() error {
 
 		err := Client.Disconnect(ctx)
 		if err != nil {
-			return fmt.Errorf("failed to disconnect from MongoDB: %v", err)
+			return err
 		}
-
-		log.Println("Disconnected from MongoDB!")
 	}
 	return nil
 }

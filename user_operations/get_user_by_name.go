@@ -3,18 +3,16 @@ package user_operations
 import (
 	"context"
 	"main/database"
+	"main/models"
 
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func GetUserByName(username string, ctx context.Context) (primitive.ObjectID, error) {
+func GetUserByName(username string, ctx context.Context) (models.User, error) {
 	user := bson.M{"username": username}
 
-	var result struct {
-		ID primitive.ObjectID `bson:"_id"`
-	}
+	var result models.User
 
 	err := database.GetUsersCollection().FindOne(ctx, user).Decode(&result)
-	return result.ID, err
+	return result, err
 }
