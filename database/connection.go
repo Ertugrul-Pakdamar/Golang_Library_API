@@ -38,7 +38,7 @@ func ConnectToMongoDB() error {
 	Books = Database.Collection("books")
 	Users = Database.Collection("users")
 
-	log.Println("MongoDB bağlantısı başarılı")
+	log.Println("MongoDB connection successful")
 	return nil
 }
 
