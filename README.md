@@ -238,14 +238,4 @@ The API uses the following default configuration:
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 🆘 Support
-
-For support and questions, please open an issue in the repository.
-
----
-
-**Built with ❤️ using Go, Fiber, and MongoDB**
+**Using Go, Fiber, and MongoDB**
