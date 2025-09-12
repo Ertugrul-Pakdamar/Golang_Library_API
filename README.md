@@ -36,7 +36,7 @@ A modern, RESTful API for library management built with Go and MongoDB. This API
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/Ertugrul-Pakdamar/golang_api.git
+   git clone https://github.com/Ertugrul-Pakdamar/Golang_Library_API.git
    cd golang_api
    ```
 
