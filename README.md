@@ -224,12 +224,6 @@ The API uses the following default configuration:
 - **Database**: golang_api_db
 - **Collections**: users, books
 
-## 📈 Performance
-
-- **Concurrent Handling**: Built with Go's goroutines for high concurrency
-- **Database Optimization**: Efficient MongoDB queries with proper indexing
-- **Memory Management**: Optimized memory usage with proper resource cleanup
-
 ## 🤝 Contributing
 
 1. Fork the repository
