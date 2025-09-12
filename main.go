@@ -21,6 +21,10 @@ func main() {
 		log.Fatal("MongoDB connection failed:", err)
 	}
 
+	// Drop Database
+	// database.GetUsersCollection().Drop(database.GetContext())
+	// database.GetBooksCollection().Drop(database.GetContext())
+
 	// Program termination signal
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
