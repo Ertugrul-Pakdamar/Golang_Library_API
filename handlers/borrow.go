@@ -46,7 +46,7 @@ func BorrowBook(c *fiber.Ctx) error {
 		return utils.SendError(c, 500, "Internal server error", "Failed to process borrowing request")
 	}
 
-	return utils.SendSuccess(c, "Book borrowed successfully", nil)
+	return utils.SendSuccess(c, 200, "Book borrowed successfully", nil)
 }
 
 func ReturnBook(c *fiber.Ctx) error {
@@ -81,5 +81,5 @@ func ReturnBook(c *fiber.Ctx) error {
 		return utils.SendError(c, 500, "Internal server error", "Failed to process return request")
 	}
 
-	return utils.SendSuccess(c, "Book returned successfully", nil)
+	return utils.SendSuccess(c, 200, "Book returned successfully", nil)
 }

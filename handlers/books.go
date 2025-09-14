@@ -27,7 +27,7 @@ func AddBook(c *fiber.Ctx) error {
 		return utils.SendError(c, 500, "Internal server error", "Failed to add book to library")
 	}
 
-	return utils.SendSuccess(c, "Book added to library successfully", nil)
+	return utils.SendSuccess(c, 201, "Book added to library successfully", nil)
 }
 
 func GetAllBooks(c *fiber.Ctx) error {
@@ -36,5 +36,9 @@ func GetAllBooks(c *fiber.Ctx) error {
 		return utils.SendError(c, 500, "Internal server error", "Failed to retrieve library catalog")
 	}
 
-	return utils.SendSuccess(c, "Library catalog retrieved successfully", books)
+	if books == nil {
+		return utils.SendSuccess(c, 204, "Library catalog is empty", books)
+	}
+
+	return utils.SendSuccess(c, 200, "Library catalog retrieved successfully", books)
 }

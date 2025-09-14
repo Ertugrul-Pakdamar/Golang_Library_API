@@ -45,7 +45,7 @@ func UserRegister(c *fiber.Ctx) error {
 		return utils.SendError(c, 500, "Internal server error", "Failed to generate authentication token")
 	}
 
-	return utils.SendSuccess(c, "User registered successfully", fiber.Map{
+	return utils.SendSuccess(c, 201, "User registered successfully", fiber.Map{
 		"token": token,
 	})
 }
@@ -70,7 +70,7 @@ func UserLogin(c *fiber.Ctx) error {
 		return utils.SendError(c, 500, "Internal server error", "Failed to generate authentication token")
 	}
 
-	return utils.SendSuccess(c, "Login successful", fiber.Map{
+	return utils.SendSuccess(c, 200, "Login successful", fiber.Map{
 		"token": token,
 	})
 }
@@ -88,5 +88,5 @@ func UserDelete(c *fiber.Ctx) error {
 		return utils.SendError(c, 500, "Internal server error", "Failed to delete user account")
 	}
 
-	return utils.SendSuccess(c, "User account deleted successfully", nil)
+	return utils.SendSuccess(c, 200, "User account deleted successfully", nil)
 }

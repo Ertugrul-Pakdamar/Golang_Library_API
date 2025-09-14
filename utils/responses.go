@@ -2,8 +2,8 @@ package utils
 
 import "github.com/gofiber/fiber/v2"
 
-func SendSuccess(c *fiber.Ctx, message string, data interface{}) error {
-	return c.JSON(fiber.Map{
+func SendSuccess(c *fiber.Ctx, code int, message string, data interface{}) error {
+	return c.Status(code).JSON(fiber.Map{
 		"success": true,
 		"message": message,
 		"data":    data,

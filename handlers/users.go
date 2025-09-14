@@ -18,5 +18,5 @@ func GetUserInfo(c *fiber.Ctx) error {
 
 	user.Password = ""
 
-	return utils.SendSuccess(c, "User information retrieved successfully", user)
+	return utils.SendSuccess(c, 200, "User information retrieved successfully", user)
 }
