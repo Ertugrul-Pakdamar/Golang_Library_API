@@ -129,7 +129,7 @@ class APITester:
             print("Login first!")
             return False
             
-        response = self.make_request("GET", "/api/books")
+        response = self.make_request("GET", "/api/book/list")
         
         if "error" in response:
             print(f"Error: {response['error']}")
