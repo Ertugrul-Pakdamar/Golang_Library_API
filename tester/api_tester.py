@@ -46,18 +46,18 @@ class APITester:
         response = self.make_request("POST", "/api/user/register", data)
         
         if "error" in response:
-            print(f"❌ Error: {response['error']}")
+            print(f"Error: {response['error']}")
             return False
             
         if response["status_code"] == 200:
             self.token = response["data"].get("data", {}).get("token")
             self.username = username
-            print(f"✅ Registered! Token: {self.token[:20]}...")
+            print(f"Registered! Token: {self.token[:20]}...")
             self.is_admin = True
             return True
         else:
             message = response.get("data", {}).get("message", "Registration failed")
-            print(f"❌ {message}")
+            print(f"{message}")
             return False
     
     def login(self, username: str, password: str) -> bool:
@@ -65,50 +65,50 @@ class APITester:
         response = self.make_request("POST", "/api/user/login", data)
         
         if "error" in response:
-            print(f"❌ Error: {response['error']}")
+            print(f"Error: {response['error']}")
             return False
             
         if response["status_code"] == 200:
             self.token = response["data"].get("data", {}).get("token")
             self.username = username
-            print(f"✅ Logged in! Token: {self.token[:20]}...")
+            print(f"Logged in! Token: {self.token[:20]}...")
             return True
         else:
             message = response.get("data", {}).get("message", "Login failed")
-            print(f"❌ {message}")
+            print(f"{message}")
             return False
     
     def delete_user(self) -> bool:
         if not self.token:
-            print("❌ Login first!")
+            print("Login first!")
             return False
             
         response = self.make_request("DELETE", "/api/user/delete")
         
         if "error" in response:
-            print(f"❌ Error: {response['error']}")
+            print(f"Error: {response['error']}")
             return False
             
         if response["status_code"] == 200:
-            print("✅ Account deleted!")
+            print("Account deleted!")
             self.token = None
             self.username = None
             self.is_admin = False
             return True
         else:
             message = response.get("data", {}).get("message", "Deletion failed")
-            print(f"❌ {message}")
+            print(f"{message}")
             return False
 
     def get_user_info(self) -> bool:
         if not self.token:
-            print("❌ Login first!")
+            print("Login first!")
             return False
             
         response = self.make_request("GET", "/api/user/info")
         
         if "error" in response:
-            print(f"❌ Error: {response['error']}")
+            print(f"Error: {response['error']}")
             return False
             
         if response["status_code"] == 200:
@@ -116,23 +116,23 @@ class APITester:
             role = user_data.get('role', 1)
             self.is_admin = (role == 0)
             
-            print(f"\n👤 {user_data.get('username', 'N/A')} ({'Admin' if self.is_admin else 'Member'})")
+            print(f"\n{user_data.get('username', 'N/A')} ({'Admin' if self.is_admin else 'Member'})")
             print(f"   Borrowed: {len(user_data.get('books_taken', []))}")
             return True
         else:
             message = response.get("data", {}).get("message", "Failed to get user info")
-            print(f"❌ {message}")
+            print(f"{message}")
             return False
 
     def get_all_books(self) -> bool:
         if not self.token:
-            print("❌ Login first!")
+            print("Login first!")
             return False
             
         response = self.make_request("GET", "/api/books")
         
         if "error" in response:
-            print(f"❌ Error: {response['error']}")
+            print(f"Error: {response['error']}")
             return False
             
         if response["status_code"] == 200:
@@ -148,83 +148,79 @@ class APITester:
             return True
         else:
             message = response.get("data", {}).get("message", "Failed to get books")
-            print(f"❌ {message}")
+            print(f"{message}")
             return False
     
     def add_book(self, title: str, author: str) -> bool:
         if not self.token:
-            print("❌ Login first!")
+            print("Login first!")
             return False
             
         if not self.is_admin:
-            print("❌ Admin required!")
+            print("Admin required!")
             return False
             
         data = {"title": title, "author": author}
         response = self.make_request("POST", "/api/book/add", data)
         
         if "error" in response:
-            print(f"❌ Error: {response['error']}")
+            print(f"Error: {response['error']}")
             return False
             
         if response["status_code"] == 200:
-            print(f"✅ Added: {title} - {author}")
+            print(f"Added: {title} - {author}")
             return True
         else:
             message = response.get("data", {}).get("message", "Failed to add book")
-            print(f"❌ {message}")
+            print(f"{message}")
             return False
 
     def borrow_book(self, title: str) -> bool:
         if not self.token:
-            print("❌ Login first!")
+            print("Login first!")
             return False
             
         data = {"title": title}
         response = self.make_request("POST", "/api/book/borrow", data)
         
         if "error" in response:
-            print(f"❌ Error: {response['error']}")
+            print(f"Error: {response['error']}")
             return False
             
         if response["status_code"] == 200:
-            print(f"✅ Borrowed: {title}")
+            print(f"Borrowed: {title}")
             return True
         else:
             message = response.get("data", {}).get("message", "Failed to borrow book")
-            print(f"❌ {message}")
+            print(f"{message}")
             return False
     
     def return_book(self, title: str) -> bool:
         if not self.token:
-            print("❌ Login first!")
+            print("Login first!")
             return False
             
         data = {"title": title}
         response = self.make_request("POST", "/api/book/return", data)
         
         if "error" in response:
-            print(f"❌ Error: {response['error']}")
+            print(f"Error: {response['error']}")
             return False
             
         if response["status_code"] == 200:
-            print(f"✅ Returned: {title}")
+            print(f"Returned: {title}")
             return True
         else:
             message = response.get("data", {}).get("message", "Failed to return book")
-            print(f"❌ {message}")
+            print(f"{message}")
             return False
-
-    def check_connection(self) -> bool:
-        response = self.make_request("GET", "/api/books")
-        return "error" not in response
-
+        
 
 def print_menu():
-    print("\n📚 Library API")
+    print("\nLibrary API")
     print("1. Register  2. Login  3. Delete  4. Info")
     print("5. Books     6. Add    7. Borrow  8. Return")
-    print("9. Test     10. Exit")
+    print("9. Exit")
 
 
 def get_input(prompt: str) -> str:
@@ -236,12 +232,6 @@ def get_input(prompt: str) -> str:
 
 def main():
     tester = APITester()
-    
-    print("📚 Library API Tester")
-    if not tester.check_connection():
-        print("❌ Server not running! Start with: go run main.go")
-        return
-    print("✅ Connected!")
     
     while True:
         print_menu()
@@ -265,7 +255,7 @@ def main():
                     if confirm.lower() in ['y', 'yes']:
                         tester.delete_user()
                 else:
-                    print("❌ Login first!")
+                    print("Login first!")
                     
             elif choice == "4":
                 tester.get_user_info()
@@ -279,37 +269,31 @@ def main():
                     author = get_input("Author: ")
                     tester.add_book(title, author)
                 else:
-                    print("❌ Admin required!")
+                    print("Admin required!")
                     
             elif choice == "7":
                 if tester.username:
                     title = get_input("Title: ")
                     tester.borrow_book(title)
                 else:
-                    print("❌ Login first!")
+                    print("Login first!")
                     
             elif choice == "8":
                 if tester.username:
                     title = get_input("Title: ")
                     tester.return_book(title)
                 else:
-                    print("❌ Login first!")
+                    print("Login first!")
                     
             elif choice == "9":
-                if tester.check_connection():
-                    print("✅ Connected!")
-                else:
-                    print("❌ Disconnected!")
-                    
-            elif choice == "10":
-                print("👋 Bye!")
+                print("Bye!")
                 break
                 
             else:
-                print("❌ Invalid choice!")
+                print("Invalid choice!")
                 
         except Exception as e:
-            print(f"❌ Error: {str(e)}")
+            print(f"Error: {str(e)}")
 
 
 if __name__ == "__main__":
