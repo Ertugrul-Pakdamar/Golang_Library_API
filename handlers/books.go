@@ -36,9 +36,5 @@ func GetAllBooks(c *fiber.Ctx) error {
 		return utils.SendError(c, 500, "Internal server error", "Failed to retrieve library catalog")
 	}
 
-	if books == nil {
-		return utils.SendSuccess(c, 204, "Library catalog is empty", books)
-	}
-
 	return utils.SendSuccess(c, 200, "Library catalog retrieved successfully", books)
 }
