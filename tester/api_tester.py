@@ -138,10 +138,10 @@ class APITester:
         if response["status_code"] == 200:
             books = response["data"].get("data", [])
             if not books:
-                print("📚 No books available")
+                print("No books available")
                 return True
                 
-            print(f"\n📚 Books ({len(books)}):")
+            print(f"\nBooks ({len(books)}):")
             for i, book in enumerate(books, 1):
                 available = book.get('count', 0) - book.get('borrowed', 0)
                 print(f"{i:2d}. {book.get('title', 'N/A')} - {book.get('author', 'N/A')} ({available} available)")
@@ -227,7 +227,7 @@ def get_input(prompt: str) -> str:
     try:
         return input(prompt).strip()
     except KeyboardInterrupt:
-        print("\n👋 Bye!")
+        print("\nBye!")
         sys.exit(0)
 
 def main():
