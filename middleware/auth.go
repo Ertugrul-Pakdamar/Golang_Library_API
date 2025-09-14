@@ -16,7 +16,7 @@ var jwtSecret = []byte(getJWTSecret())
 func getJWTSecret() string {
 	secret := os.Getenv("JWT_SECRET")
 	if secret == "" {
-		return "your-super-secret-jwt-key-change-this-in-production"
+		return "your-secret-jwt-key-change-this-in-production"
 	}
 	return secret
 }

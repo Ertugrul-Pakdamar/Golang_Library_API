@@ -43,7 +43,7 @@ func main() {
 	fib.Delete("/api/user/delete", middleware.JWTProtected(), handlers.UserDelete)
 	fib.Get("/api/user/info", middleware.JWTProtected(), handlers.GetUserInfo)
 	fib.Post("/api/book/add", middleware.JWTProtectedAdmin(), handlers.AddBook)
-	fib.Get("/api/books", middleware.JWTProtected(), handlers.GetAllBooks)
+	fib.Get("/api/book/list", middleware.JWTProtected(), handlers.GetAllBooks)
 	fib.Post("/api/book/borrow", middleware.JWTProtected(), handlers.BorrowBook)
 	fib.Post("/api/book/return", middleware.JWTProtected(), handlers.ReturnBook)
 
